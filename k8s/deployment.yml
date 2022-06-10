@@ -43,20 +43,20 @@ kind: Deployment
 metadata:
   name: kubenews
 spec:
-  replicas: 5
+  replicas: 2
   selector:
     matchLabels:
       app: kubenews
   template:
     metadata:
       annotations:
-        kubernetes.io/change-cause: V1 -> V2
+        kubernetes.io/change-cause: Mudando versao
       labels:
         app: kubenews
     spec:
       containers:
       - name: kubenews
-        image: rodrigoturatti/kube-news:v2
+        image: rodrigoturatti/kube-news:latest
         env:
         - name: DB_DATABASE
           value: "kubenews"
