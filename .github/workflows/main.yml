@@ -14,11 +14,10 @@ on:
   workflow_dispatch:
 
 jobs:
-CI:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+  CI:
     steps:
       - uses: actions/checkout@v3
 
@@ -38,22 +37,22 @@ CI:
             ${{secrets.DOCKERHUB_USER}}/kube-news:latest
             ${{secrets.DOCKERHUB_USER}}/kube-news:${{github.run_number}}
             
-CD:
-  needs: [CI]
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v3
-    - name: Kubernetes Set Context
-      uses: Azure/k8s-set-context@v2
-      with:
-        method: kubeconfig
-        kubeconfig: ${{secrets.K8S_CONFIG}}
-    - name: Deploy to Kubernetes cluster
-      uses: Azure/k8s-deploy@v3.1
-      with:
-        images: |
-          ${{secrets.DOCKERHUB_USER}}/kube-news:${{github.run_number}}
-        manifests: |
-          k8s/deployment.yml
+  CD:
+    needs: [CI]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Kubernetes Set Context
+        uses: Azure/k8s-set-context@v2
+        with:
+          method: kubeconfig
+          kubeconfig: ${{secrets.K8S_CONFIG}}
+      - name: Deploy to Kubernetes cluster
+        uses: Azure/k8s-deploy@v3.1
+        with:
+          images: |
+            ${{secrets.DOCKERHUB_USER}}/kube-news:${{github.run_number}}
+          manifests: |
+            k8s/deployment.yml
           
   
