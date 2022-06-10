@@ -50,7 +50,7 @@ spec:
   template:
     metadata:
       annotations:
-        kubernetes.io/change-cause: Mudando versao
+        kubernetes.io/change-cause: Desafio 04
       labels:
         app: kubenews
     spec:
