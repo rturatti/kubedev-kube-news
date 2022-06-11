@@ -43,14 +43,14 @@ kind: Deployment
 metadata:
   name: kubenews
 spec:
-  replicas: 20
+  replicas: 10
   selector:
     matchLabels:
       app: kubenews
   template:
     metadata:
       annotations:
-        kubernetes.io/change-cause: Desafio 04
+        kubernetes.io/change-cause: Desafio 05 - Aumentando quantidade de replicas
       labels:
         app: kubenews
     spec:
